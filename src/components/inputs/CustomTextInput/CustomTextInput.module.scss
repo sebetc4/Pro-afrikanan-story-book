@@ -1,0 +1,143 @@
+@import '../../../styles/libs/mixins.scss';
+@import '../../../styles/libs/variables.scss';
+
+.inputContainer {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+    background-color: hsl(90, 5%, 95%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 8px;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        z-index: 1;
+    }
+
+    &--focused::before,
+    &--focused::after,
+    &--invalid::before,
+    &--invalid::after {
+        width: 100%;
+        height: 100%;
+    }
+
+    &--focused::before {
+        border-top-color: $color-primary;
+        border-right-color: $color-primary;
+        transition: width 0.5s ease-out, height 0.25s ease-out 0.5s;
+    }
+
+    &--focused::after {
+        border-bottom-color: $color-primary;
+        border-left-color: $color-primary;
+        transition: height 0.25s ease-out, width 0.5s ease-out 0.25s;
+    }
+
+    &--invalid::before {
+        border-top-color: $color-error;
+        border-right-color: $color-error;
+    }
+
+    &--invalid::after {
+        border-bottom-color: $color-error;
+        border-left-color: $color-error;
+    }
+}
+
+    input {
+        min-height: 50px;
+        display: block;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding: 0 20px;
+        border: transparent;
+        background-color: transparent;
+        font-size: 1rem;
+        outline: 0;
+    }
+
+    input:-webkit-autofill {
+        border-radius: 8px;
+        box-shadow: 0 0 0px 1000px rgb(242, 243, 242) inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &--focused {
+        input:-webkit-autofill,
+        textarea:-webkit-autofill {
+            border: 2px solid $color-primary;
+        }
+    }
+
+    &--invalid {
+        input:-webkit-autofill,
+        textarea:-webkit-autofill {
+            border: 2px solid $color-error;
+        }
+    }
+
+    label {
+        background: rgb(242, 243, 242);
+        background: linear-gradient(
+            0deg,
+            rgba(242, 243, 242, 1) 0%,
+            rgba(242, 243, 242, 1) 50%,
+            rgba(242, 243, 242, 0) 61%
+        );
+        color: #7c7c88;
+        left: 10px;
+        top: 50%;
+        padding: 0 10px;
+        line-height: 14px;
+        pointer-events: none;
+        transform: translateY(-50%);
+        position: absolute;
+        transition: 200ms, color 200ms;
+        z-index: 99;
+    }
+
+    &--focused label,
+    &--valid label,
+    &--invalid label {
+        transform: translateY(-50%) scale(0.9);
+        top: 0 !important;
+        left: 20px;
+    }
+
+    &--valid label {
+        color: #7c7c88;
+    }
+
+    &--focused label {
+        color: $color-primary;
+    }
+
+    &--invalid label {
+        color: $color-error;
+    }
+
+    p {
+        display: none;
+        position: absolute;
+        bottom: -25px;
+        left: 15px;
+        font-size: 0.8rem;
+        color: $color-error;
+    }
+
+    &--invalid {
+        p {
+            display: block;
+        }
+    }
+}

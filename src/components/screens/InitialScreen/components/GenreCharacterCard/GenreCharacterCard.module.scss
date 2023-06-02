@@ -1,0 +1,25 @@
+@import '../../../../../styles/libs/mixins.scss';
+@import '../../../../../styles/libs/variables.scss';
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    @include p(8);
+    border-radius: 50px;
+    background-color: $secondary-color;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+    &ImageContainer {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        width: 400px;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    }
+
+    &RadioButtonContainer {
+        @include mt(4);
+        display: flex;
+        justify-content: center;
+    }
+}
