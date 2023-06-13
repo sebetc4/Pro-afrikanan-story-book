@@ -1,0 +1,49 @@
+@import '../../styles/libs/mixins.scss';
+@import '../../styles/libs/variables.scss';
+
+.chapterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    @include p(12);
+    background-color: #fafafa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 300px 25px rgba(222, 198, 122, 0.7) inset;
+    border: 1px solid #c2b5a3;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: inherit;
+}
+
+.imgContainer {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+}
+
+.text {
+    text-align: center;
+    line-height: 1.3;
+}
+
+.choicesContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.choice {
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: $primary-color;
+    transition: all 0.3s ease;
+    &:hover, &:focus {
+        transform: scale(1.1);
+    }
+}

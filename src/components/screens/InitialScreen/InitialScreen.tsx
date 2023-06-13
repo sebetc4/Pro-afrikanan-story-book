@@ -1,68 +1,27 @@
-import React, { use, useEffect, useState } from 'react';
-import { RubberButton } from '../..';
-import styles from './InitialScreen.module.scss';
+import { motion } from 'framer-motion';
+import { RubberButton } from '~/components/buttons/RubberButton/RubberButton';
 import { useStory } from '~/hooks';
-import { ProtagonistGenre, StoryState } from '~/types';
-import { GenreCharacterCard } from './components';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { StoryState } from '~/types';
 import { fadeIn } from '~/utils';
+import styles from './InitialScreen.module.scss';
 
 export const InitialScreen = () => {
     // Hooks
-    const { storyState, setStoryState } = useStory();
-    const buttonAnimationControls = useAnimation();
-
-    // State
-    const [characterSelected, setCharacterSelected] = useState<ProtagonistGenre | null>(null);
-    const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+    const { setStoryState } = useStory();
 
     const handleClick = () => {
-        setStoryState(StoryState.CHARACTER_SELECTION);
+        setStoryState(StoryState.PROTAGONIST_SELECTION);
     };
-
-    const handleChangeCharacter = (id: string) => {
-        setCharacterSelected(id as ProtagonistGenre);
-    };
-
-    useEffect(() => {
-        storyState !== StoryState.INITIAL && buttonAnimationControls.start({ scale: 0 });
-    }, [storyState, buttonAnimationControls]);
 
     return (
-        <>
-            <motion.div
-                className={styles.rubberButonContainer}
-                variants={fadeIn('up', 'spring', 0.5, 1)}
-                initial='hidden'
-                animate={storyState === StoryState.INITIAL ? 'visible' : buttonAnimationControls}
-            >
-                <RubberButton onClick={handleClick}>Commencer une nouvelle histoire</RubberButton>
-            </motion.div>
-            <div className={styles.characterSelectionContainer}>
-                <div className={styles.cardsContainer}>
-                    <motion.div
-                        variants={fadeIn('right', 'spring', 0.5, 1)}
-                        initial='hidden'
-                        animate={storyState === StoryState.CHARACTER_SELECTION ? 'visible' : ''}
-                    >
-                        <GenreCharacterCard
-                            isBoy
-                            characterSelected={characterSelected}
-                            handleChangeCharacter={handleChangeCharacter}
-                        />
-                    </motion.div>
-                    <motion.div
-                        variants={fadeIn('left', 'spring', 0.5, 1)}
-                        initial='hidden'
-                        animate={storyState === StoryState.CHARACTER_SELECTION ? 'visible' : ''}
-                    >
-                        <GenreCharacterCard
-                            characterSelected={characterSelected}
-                            handleChangeCharacter={handleChangeCharacter}
-                        />
-                    </motion.div>
-                </div>
-            </div>
-        </>
+        <motion.div
+            className={styles.rubberButonContainer}
+            variants={fadeIn('up', 'spring', 0.5, 1)}
+            initial='hidden'
+            animate={'visible'}
+            exit={{ scale: 0 }}
+        >
+            <RubberButton onClick={handleClick}>Commencer une nouvelle histoire</RubberButton>
+        </motion.div>
     );
 };

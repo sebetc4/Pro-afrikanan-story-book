@@ -16,6 +16,8 @@ $motion-duration: 0.3s;
     padding: 1em 1.5em;
     position: relative;
     transition: filter $motion-duration;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     &:hover {
         filter: brightness(1.1);
     }
@@ -51,6 +53,10 @@ $motion-duration: 0.3s;
 }
 
 .button:hover > svg > path {
+    d: path('M0,0 C0,-5 100,-5 100,0 C105,0 105,100 100,100 C100,105 0,105 0,100 C-5,100 -5,0 0,0');
+}
+
+.button:focus > svg > path {
     d: path('M0,0 C0,-5 100,-5 100,0 C105,0 105,100 100,100 C100,105 0,105 0,100 C-5,100 -5,0 0,0');
 }
 
